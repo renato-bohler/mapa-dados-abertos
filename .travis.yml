@@ -8,6 +8,8 @@ cache:
     - "node_modules"
 before_deploy:
   - yarn build
+script:
+  - echo "No tests implemented yet..."
 deploy:
   provider: pages
   keep-history: true
