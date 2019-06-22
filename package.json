@@ -1,18 +1,23 @@
 {
   "name": "mapa-dados-abertos",
   "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-scripts": "3.0.1",
-    "styled-components": "^4.3.2"
+  "homepage": "https://renato-bohler.github.io/mapa-dados-abertos",
+  "author": "Renato Böhler <renato.bohler@gmail.com> (https://github.com/renato-bohler)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/renato-bohler/mapa-dados-abertos/issues"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
+  },
+  "dependencies": {
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-scripts": "3.0.1",
+    "styled-components": "^4.3.2"
   },
   "eslintConfig": {
     "extends": "react-app"
