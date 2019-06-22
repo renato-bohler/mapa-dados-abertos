@@ -21,9 +21,9 @@ const BaseButton = styled.button`
 
   &:hover,
   &:focus {
-    background: ${props => (props.selected ? props.theme.colors.green : 'none')};
+    background: ${props => (props.selected ? props.theme.colors.lightGreen : 'none')};
     border: 2px solid ${props => (props.selected ? props.theme.colors.green : props.theme.colors.gray)};
-    color: ${props => (props.selected ? props.theme.colors.yellow : props.theme.colors.black)};
+    color: ${props => (props.selected ? props.theme.colors.blue : props.theme.colors.black)};
   }
 
   &:active {
