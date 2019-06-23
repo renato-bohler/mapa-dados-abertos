@@ -4,8 +4,13 @@ import theme from './theme';
 import { Body, Content, Title, Subtitle, TextHighlight, Paragraph, Link, Button, ButtonContainer, DataList, StateSelect } from './components';
 
 const App = () => {
-  const [selectedButton, setSelectedButton] = useState('federal');
-  const [selectedRegion] = useState('');
+  const [selectedButton, setSelectedButton] = useState('');
+  const [selectedRegion, setSelectedRegion] = useState('');
+
+  const handleClickButton = selected => {
+    setSelectedButton(selected);
+    setSelectedRegion('');
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -27,18 +32,18 @@ const App = () => {
           </Paragraph>
           <Subtitle>Selecione uma opção</Subtitle>
           <ButtonContainer>
-            <Button onClick={() => setSelectedButton('federal')} selected={selectedButton === 'federal'}>
+            <Button onClick={() => handleClickButton('federal')} selected={selectedButton === 'federal'}>
               Federal
             </Button>
-            <Button onClick={() => setSelectedButton('estadual')} selected={selectedButton === 'estadual'}>
+            <Button onClick={() => handleClickButton('estadual')} selected={selectedButton === 'estadual'}>
               Estadual
             </Button>
-            <Button onClick={() => setSelectedButton('municipal')} selected={selectedButton === 'municipal'}>
+            <Button onClick={() => handleClickButton('municipal')} selected={selectedButton === 'municipal'}>
               Municipal
             </Button>
           </ButtonContainer>
           <DataList selectedButton={selectedButton} selectedRegion={selectedRegion} />
-          <StateSelect selectedButton={selectedButton} selectedRegion={selectedRegion} callback={console.log} />
+          <StateSelect selectedButton={selectedButton} selectedRegion={selectedRegion} callback={setSelectedRegion} />
         </Content>
       </Body>
     </ThemeProvider>

@@ -9,6 +9,7 @@ const getTitle = (selectedButton, selectedRegion = '') => {
     return 'Dados abertos federais';
   }
 
+  // TODO: get state name with its ID
   return `Dados abertos de ${selectedRegion}`;
 };
 
@@ -17,6 +18,7 @@ const getData = selectedButton => {
     return federal;
   }
 
+  // TODO: getData for states
   return [];
 };
 
@@ -99,8 +101,8 @@ const List = ({ title, data = [] }) => (
 );
 
 const DataList = ({ selectedButton, selectedRegion = '' }) => {
-  if (selectedButton === 'federal') {
-    return <List title={getTitle(selectedButton)} data={getData(selectedButton, selectedRegion)} />;
+  if (selectedButton === 'federal' || (selectedButton === 'estadual' && selectedRegion)) {
+    return <List title={getTitle(selectedButton, selectedRegion)} data={getData(selectedButton, selectedRegion)} />;
   }
 
   return null;
