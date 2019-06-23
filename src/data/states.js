@@ -1,0 +1,197 @@
+export default [
+  {
+    ufCode: 11,
+    uf: 'RO',
+    name: 'Rondônia',
+    list: [],
+  },
+  {
+    ufCode: 12,
+    uf: 'AC',
+    name: 'Acre',
+    list: [],
+  },
+  {
+    ufCode: 13,
+    uf: 'AM',
+    name: 'Amazonas',
+    list: [],
+  },
+  {
+    ufCode: 14,
+    uf: 'RR',
+    name: 'Roraima',
+    list: [],
+  },
+  {
+    ufCode: 15,
+    uf: 'PA',
+    name: 'Pará',
+    list: [],
+  },
+  {
+    ufCode: 16,
+    uf: 'AP',
+    name: 'Amapá',
+    list: [],
+  },
+  {
+    ufCode: 17,
+    uf: 'TO',
+    name: 'Tocantins',
+    list: [],
+  },
+  {
+    ufCode: 21,
+    uf: 'MA',
+    name: 'Maranhão',
+    list: [],
+  },
+  {
+    ufCode: 22,
+    uf: 'PI',
+    name: 'Piauí',
+    list: [],
+  },
+  {
+    ufCode: 23,
+    uf: 'CE',
+    name: 'Ceará',
+    list: [],
+  },
+  {
+    ufCode: 24,
+    uf: 'RN',
+    name: 'Rio Grande do Norte',
+    list: [],
+  },
+  {
+    ufCode: 25,
+    uf: 'PB',
+    name: 'Paraíba',
+    list: [],
+  },
+  {
+    ufCode: 26,
+    uf: 'PE',
+    name: 'Pernambuco',
+    list: [],
+  },
+  {
+    ufCode: 27,
+    uf: 'AL',
+    name: 'Alagoas',
+    list: [],
+  },
+  {
+    ufCode: 28,
+    uf: 'SE',
+    name: 'Sergipe',
+    list: [],
+  },
+  {
+    ufCode: 29,
+    uf: 'BA',
+    name: 'Bahia',
+    list: [],
+  },
+  {
+    ufCode: 31,
+    uf: 'MG',
+    name: 'Minas Gerais',
+    list: [],
+  },
+  {
+    ufCode: 32,
+    uf: 'ES',
+    name: 'Espírito Santo',
+    list: [],
+  },
+  {
+    ufCode: 33,
+    uf: 'RJ',
+    name: 'Rio de Janeiro',
+    list: [],
+  },
+  {
+    ufCode: 35,
+    uf: 'SP',
+    name: 'São Paulo',
+    list: [],
+  },
+  {
+    ufCode: 41,
+    uf: 'PR',
+    name: 'Paraná',
+    list: [
+      {
+        title: 'Governo do Estado do Paraná',
+        subtitle: 'Portal da Transparência',
+        url: 'http://www.transparencia.pr.gov.br',
+      },
+      {
+        title: 'Universidade Tecnológica Federal do Paraná',
+        subtitle: 'Portal de Dados Abertos',
+        url: 'https://dados.utfpr.edu.br',
+      },
+    ],
+  },
+  {
+    ufCode: 42,
+    uf: 'SC',
+    name: 'Santa Catarina',
+    list: [
+      {
+        title: 'Poder Executivo de Santa Catarina',
+        subtitle: 'Portal da Transparência',
+        url: 'http://www.transparencia.sc.gov.br/',
+      },
+    ],
+  },
+  {
+    ufCode: 43,
+    uf: 'RS',
+    name: 'Rio Grande do Sul',
+    list: [
+      {
+        title: 'Governo do Estado do Rio Grande do Sul',
+        subtitle: 'Dados RS',
+        url: 'https://dados.rs.gov.br',
+      },
+      {
+        title: 'Ministério Público do Rio Grande do Sul',
+        subtitle: 'Dados Abertos MPRS',
+        url: 'http://dados.mprs.mp.br',
+      },
+      {
+        title: 'Assembleia Legislativa do Estado do Rio Grande do Sul',
+        subtitle: 'Transparência no Legislativo',
+        url: 'http://www2.al.rs.gov.br/transparenciaalrs/DadosAbertos/tabid/5584/Default.aspx',
+      },
+    ],
+  },
+  {
+    ufCode: 50,
+    uf: 'MS',
+    name: 'Mato Grosso do Sul',
+    list: [],
+  },
+  {
+    ufCode: 51,
+    uf: 'MT',
+    name: 'Mato Grosso',
+    list: [],
+  },
+  {
+    ufCode: 52,
+    uf: 'GO',
+    name: 'Goiás',
+    list: [],
+  },
+  {
+    ufCode: 53,
+    uf: 'DF',
+    name: 'Distrito Federal',
+    list: [],
+  },
+];
