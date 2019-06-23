@@ -7,6 +7,13 @@ import Subsubtitle from './Subsubtitle';
 
 import brasil from '../topo/states.json';
 
+const Composable = styled(ComposableMap)`
+  width: 90vw;
+  height: 90vw;
+  max-width: 600px;
+  max-height: 600px;
+`;
+
 const Tooltip = styled(ReactTooltip)`
   color: ${props => props.theme.colors.black} !important;
   font-weight: bold;
@@ -32,7 +39,7 @@ const Container = styled.div`
   margin: 50px 0;
 `;
 
-const mapCenter = [-52.77989334751745, -13.603361893828286];
+const mapCenter = [-54.77989334751745, -13.603361893828286];
 
 const StateSelect = ({ callback, selectedButton, selectedRegion }) => {
   if (selectedRegion || selectedButton !== 'estadual') {
@@ -41,11 +48,10 @@ const StateSelect = ({ callback, selectedButton, selectedRegion }) => {
   return (
     <Container>
       <Subsubtitle>Selecione um estado</Subsubtitle>
-      <ComposableMap
+      <Composable
         projectionConfig={{
           scale: 1200,
         }}
-        style={{ width: '600px', height: '600px' }}
       >
         <ZoomableGroup center={mapCenter} disablePanning>
           <Geographies geography={brasil}>
@@ -80,7 +86,7 @@ const StateSelect = ({ callback, selectedButton, selectedRegion }) => {
             }
           </Geographies>
         </ZoomableGroup>
-      </ComposableMap>
+      </Composable>
       <Tooltip id="map" border />
     </Container>
   );

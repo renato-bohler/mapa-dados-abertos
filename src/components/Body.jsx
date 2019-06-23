@@ -11,6 +11,10 @@ const Body = styled.div`
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  @media screen and (max-width: 650px) {
+    padding: 5px;
+  }
 `;
 
 export default Body;
