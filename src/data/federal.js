@@ -4,12 +4,13 @@ export default [
     url: 'http://dados.gov.br',
   },
   {
-    title: 'Portal da Transparência do Governo Federal',
+    title: 'Governo Federal',
+    subtitle: 'Portal da Transparência',
     url: 'http://www.portaltransparencia.gov.br/download-de-dados',
   },
   {
-    title: 'Portal de Dados Abertos',
-    subtitle: 'Ministério do Meio Ambiente',
-    url: 'http://dados.mma.gov.br/',
+    title: 'Ministério do Meio Ambiente',
+    subtitle: 'Portal de Dados Abertos',
+    url: 'http://dados.mma.gov.br',
   },
 ];
