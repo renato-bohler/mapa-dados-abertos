@@ -5,11 +5,20 @@ import { Body, Content, Title, Subtitle, TextHighlight, Paragraph, Link, Button,
 
 const App = () => {
   const [selectedButton, setSelectedButton] = useState('');
-  const [selectedRegion, setSelectedRegion] = useState('');
+  const [selectedRegion, setSelectedRegion] = useState(0);
+
+  const scrollToList = () => window.scrollTo(0, document.getElementById('list').offsetTop);
 
   const handleClickButton = selected => {
     setSelectedButton(selected);
     setSelectedRegion('');
+  };
+
+  const handleClickRegion = region => {
+    setSelectedRegion(region);
+    if (region) {
+      scrollToList();
+    }
   };
 
   return (
@@ -42,8 +51,8 @@ const App = () => {
               Municipal
             </Button>
           </ButtonContainer>
+          <StateSelect selectedButton={selectedButton} selectedRegion={selectedRegion} callback={handleClickRegion} />
           <DataList selectedButton={selectedButton} selectedRegion={selectedRegion} />
-          <StateSelect selectedButton={selectedButton} selectedRegion={selectedRegion} callback={setSelectedRegion} />
         </Content>
       </Body>
     </ThemeProvider>

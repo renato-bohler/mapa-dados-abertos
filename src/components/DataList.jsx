@@ -3,22 +3,27 @@ import styled from 'styled-components';
 import Subsubtitle from './Subsubtitle';
 
 import federal from '../data/federal';
+import states from '../data/states';
 
-const getTitle = (selectedButton, selectedRegion = '') => {
+const getState = ufCode => states.find(s => s.ufCode === ufCode) || { name: '', list: [] };
+
+const getTitle = (selectedButton, selectedRegion = 0) => {
   if (selectedButton === 'federal') {
     return 'Dados abertos federais';
   }
 
-  // TODO: get state name with its ID
-  return `Dados abertos de ${selectedRegion}`;
+  return `Dados abertos ${getState(selectedRegion).name}`;
 };
 
-const getData = selectedButton => {
+const getData = (selectedButton, selectedRegion = 0) => {
   if (selectedButton === 'federal') {
     return federal;
   }
 
-  // TODO: getData for states
+  if (selectedButton === 'estadual' && selectedRegion) {
+    return getState(selectedRegion).list;
+  }
+
   return [];
 };
 
@@ -81,7 +86,7 @@ const ItemTitle = styled.span`
 
 const ItemSubtitle = styled.div`
   font-style: italic;
-  font-size: 12px;
+  font-size: 15px;
   text-decoration: none;
   color: ${props => props.theme.colors.black};
 `;
@@ -93,19 +98,32 @@ const NoResults = styled.div`
   line-height: 100px;
 `;
 
-const List = ({ title, data = [] }) => (
-  <>
+const ListContainer = styled.div`
+  visibility: ${props => (props.visible ? 'visible' : 'hidden')};
+`;
+
+const List = ({ title, id, visible, data = [] }) => (
+  <ListContainer id={id} visible={visible}>
     <Subsubtitle>{title}</Subsubtitle>
     <Box>{data.length ? data.map(d => <Item key={d.url} {...d} />) : <NoResults>Nenhum resultado encontrado</NoResults>}</Box>
-  </>
+  </ListContainer>
 );
 
-const DataList = ({ selectedButton, selectedRegion = '' }) => {
-  if (selectedButton === 'federal' || (selectedButton === 'estadual' && selectedRegion)) {
-    return <List title={getTitle(selectedButton, selectedRegion)} data={getData(selectedButton, selectedRegion)} />;
-  }
+const DataList = ({ selectedButton, selectedRegion = 0 }) => {
+  const isVisible = (button, region) => {
+    if (button === 'federal') return true;
+    if (button === 'estadual' && region) return true;
+    return false;
+  };
 
-  return null;
+  return (
+    <List
+      id="list"
+      visible={isVisible(selectedButton, selectedRegion)}
+      title={getTitle(selectedButton, selectedRegion)}
+      data={getData(selectedButton, selectedRegion)}
+    />
+  );
 };
 
 export default DataList;

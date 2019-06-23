@@ -5,7 +5,8 @@ import ReactTooltip from 'react-tooltip';
 import theme from '../theme';
 import Subsubtitle from './Subsubtitle';
 
-import brasil from '../topo/states.json';
+import brasil from '../topo/states';
+import states from '../data/states';
 
 const Composable = styled(ComposableMap)`
   width: 90vw;
@@ -16,8 +17,8 @@ const Composable = styled(ComposableMap)`
 
 const Tooltip = styled(ReactTooltip)`
   color: ${props => props.theme.colors.black} !important;
-  font-weight: bold;
   font-size: 15px;
+  text-align: center;
 
   background-color: ${props => props.theme.colors.white} !important;
   box-shadow: 1px 11px 5px -4px ${props => props.theme.colors.gray};
@@ -42,9 +43,30 @@ const Container = styled.div`
 const mapCenter = [-54.77989334751745, -13.603361893828286];
 
 const StateSelect = ({ callback, selectedButton, selectedRegion }) => {
-  if (selectedRegion || selectedButton !== 'estadual') {
+  if (selectedButton !== 'estadual') {
     return null;
   }
+
+  const isSelected = geography => geography.id === selectedRegion;
+  const getStateName = ufCode => (states.find(s => s.ufCode === ufCode) || { name: 'a' }).name;
+  const countData = geography => (states.find(s => s.ufCode === geography.id) || { list: [] }).list.length;
+
+  const fillColor = (geography, type = 'default') => {
+    if (type === 'default') {
+      if (isSelected(geography)) return theme.colors.green;
+      if (countData(geography)) return theme.colors.lightGray;
+      return theme.colors.lightRed;
+    }
+
+    if (type === 'hover') {
+      if (isSelected(geography)) return theme.colors.green;
+      if (countData(geography)) return theme.colors.lightGreen;
+      return theme.colors.lightRed;
+    }
+
+    return theme.colors.lightGreen;
+  };
+
   return (
     <Container>
       <Subsubtitle>Selecione um estado</Subsubtitle>
@@ -54,7 +76,7 @@ const StateSelect = ({ callback, selectedButton, selectedRegion }) => {
         }}
       >
         <ZoomableGroup center={mapCenter} disablePanning>
-          <Geographies geography={brasil}>
+          <Geographies geography={brasil} disableOptimization>
             {(geographies, projection) =>
               geographies.map(geography => (
                 <Geography
@@ -64,22 +86,22 @@ const StateSelect = ({ callback, selectedButton, selectedRegion }) => {
                   onClick={({ id }) => callback(id)}
                   style={{
                     default: {
-                      fill: theme.colors.lightGray,
+                      fill: fillColor(geography),
                       stroke: theme.colors.green,
                       outline: 'none',
                     },
                     hover: {
-                      fill: theme.colors.gray,
+                      fill: fillColor(geography, 'hover'),
                       stroke: theme.colors.green,
                       outline: 'none',
                     },
                     pressed: {
-                      fill: theme.colors.lightGreen,
+                      fill: fillColor(geography, 'pressed'),
                       stroke: theme.colors.green,
                       outline: 'none',
                     },
                   }}
-                  data-tip={`${geography.properties.nome} (${geography.id})`}
+                  data-tip={geography.id}
                   data-for="map"
                 />
               ))
@@ -87,7 +109,23 @@ const StateSelect = ({ callback, selectedButton, selectedRegion }) => {
           </Geographies>
         </ZoomableGroup>
       </Composable>
-      <Tooltip id="map" border />
+      <Tooltip
+        id="map"
+        getContent={data => {
+          const id = parseInt(data, 0);
+          const listCount = countData({ id });
+          return (
+            <>
+              <div>
+                <strong>{getStateName(id)}</strong>
+              </div>
+              <div>{`(${listCount || 'nenhuma'} fonte${listCount > 1 ? 's' : ''} encontrada${listCount > 1 ? 's' : ''})`}</div>
+            </>
+          );
+        }}
+        border
+        multiline
+      />
     </Container>
   );
 };

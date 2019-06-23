@@ -9,5 +9,6 @@ export default {
     yellow: '#fedf00',
     blue: '#336ef9',
     darkBlue: '#002376',
+    lightRed: '#f7a0a0',
   },
 };
