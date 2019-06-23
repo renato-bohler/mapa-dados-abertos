@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Subsubtitle } from '.';
+import Subsubtitle from './Subsubtitle';
 
 import federal from '../data/federal';
 
@@ -94,7 +94,7 @@ const NoResults = styled.div`
 const List = ({ title, data = [] }) => (
   <>
     <Subsubtitle>{title}</Subsubtitle>
-    <Box>{data.length ? data.map(d => <Item {...d} />) : <NoResults>Nenhum resultado encontrado</NoResults>}</Box>
+    <Box>{data.length ? data.map(d => <Item key={d.url} {...d} />) : <NoResults>Nenhum resultado encontrado</NoResults>}</Box>
   </>
 );
 
