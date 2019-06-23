@@ -4,6 +4,7 @@ export { default as ButtonContainer } from './ButtonContainer';
 export { default as Content } from './Content';
 export { default as DataList } from './DataList';
 export { default as Link } from './Link';
+export { default as StateSelect } from './StateSelect';
 export { default as Paragraph } from './Paragraph';
 export { default as Subtitle } from './Subtitle';
 export { default as Subsubtitle } from './Subsubtitle';
