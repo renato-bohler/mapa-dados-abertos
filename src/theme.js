@@ -3,6 +3,7 @@ export default {
     black: '#000000',
     gray: 'rgba(0, 0, 0, 0.1)',
     lightGray: 'rgba(0, 0, 0, 0.025)',
+    white: '#ffffff',
     green: '#009b3a',
     lightGreen: '#3de47c',
     yellow: '#fedf00',

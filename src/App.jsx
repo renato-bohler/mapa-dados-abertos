@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 import theme from './theme';
-import { Body, Content, Title, Subtitle, TextHighlight, Paragraph, Link, Button, ButtonContainer } from './components';
+import { Body, Content, Title, Subtitle, TextHighlight, Paragraph, Link, Button, ButtonContainer, DataList } from './components';
 
 const App = () => {
   const [selectedButton, setSelectedButton] = useState('federal');
+  const [selectedRegion] = useState('');
 
   return (
     <ThemeProvider theme={theme}>
@@ -19,7 +20,7 @@ const App = () => {
           </Paragraph>
           <Paragraph>
             Qualquer pessoa pode propor alterações alterações à forma ou conteúdo desta página,{' '}
-            <Link href="https://github.com/renato-bohler/mapa-dados-abertos" target="_blank">
+            <Link href="https://github.com/renato-bohler/mapa-dados-abertos" target="_blank" rel="noopener noreferrer">
               através deste repositório
             </Link>
             , hospedado no GitHub.
@@ -36,6 +37,7 @@ const App = () => {
               Municipal
             </Button>
           </ButtonContainer>
+          <DataList selectedButton={selectedButton} selectedRegion={selectedRegion} />
         </Content>
       </Body>
     </ThemeProvider>
