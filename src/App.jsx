@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 import theme from './theme';
-import { Body, Content, Title, Subtitle, TextHighlight, Paragraph, Link, Button, ButtonContainer, DataList } from './components';
+import { Body, Content, Title, Subtitle, TextHighlight, Paragraph, Link, Button, ButtonContainer, DataList, StateSelect } from './components';
 
 const App = () => {
   const [selectedButton, setSelectedButton] = useState('federal');
@@ -38,6 +38,7 @@ const App = () => {
             </Button>
           </ButtonContainer>
           <DataList selectedButton={selectedButton} selectedRegion={selectedRegion} />
+          <StateSelect selectedButton={selectedButton} selectedRegion={selectedRegion} callback={console.log} />
         </Content>
       </Body>
     </ThemeProvider>

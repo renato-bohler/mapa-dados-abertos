@@ -1,14 +1,28 @@
-/**
- * @TODO
- * - adicionar tooltip
- */
 import React from 'react';
 import styled from 'styled-components';
 import { ComposableMap, ZoomableGroup, Geographies, Geography } from 'react-simple-maps';
+import ReactTooltip from 'react-tooltip';
 import theme from '../theme';
 import Subsubtitle from './Subsubtitle';
 
 import brasil from '../topo/states.json';
+
+const Tooltip = styled(ReactTooltip)`
+  color: ${props => props.theme.colors.black} !important;
+  font-weight: bold;
+  font-size: 15px;
+
+  background-color: ${props => props.theme.colors.white} !important;
+  box-shadow: 1px 11px 5px -4px ${props => props.theme.colors.gray};
+
+  &.place-top {
+    &:after {
+      border-top-color: ${props => props.theme.colors.white} !important;
+      border-top-style: solid !important;
+      border-top-width: 6px !important;
+    }
+  }
+`;
 
 const Container = styled.div`
   display: flex;
@@ -59,12 +73,15 @@ const StateSelect = ({ callback, selectedButton, selectedRegion }) => {
                       outline: 'none',
                     },
                   }}
+                  data-tip={`${geography.properties.nome} (${geography.id})`}
+                  data-for="map"
                 />
               ))
             }
           </Geographies>
         </ZoomableGroup>
       </ComposableMap>
+      <Tooltip id="map" border />
     </Container>
   );
 };
