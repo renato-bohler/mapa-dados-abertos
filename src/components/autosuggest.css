@@ -1,9 +1,11 @@
 .react-autosuggest__container {
   position: relative;
+  margin: 25px 0;
 }
 
 .react-autosuggest__input {
-  width: 240px;
+  width: 500px;
+  max-width: 80vw;
   height: 30px;
   padding: 10px 20px;
   font-family: 'Open Sans', sans-serif;
@@ -12,6 +14,8 @@
   border: 1px solid #aaa;
   border-radius: 4px;
   -webkit-appearance: none;
+  text-overflow: ellipsis;
+  box-shadow: 5px 5px 20px 0px rgba(0, 0, 0, 0.16862745098039217)
 }
 
 .react-autosuggest__input--focused {
@@ -35,7 +39,7 @@
   display: block;
   position: absolute;
   top: 51px;
-  width: 280px;
+  width: 540px;
   border: 1px solid #aaa;
   background-color: #fff;
   font-family: 'Open Sans', sans-serif;

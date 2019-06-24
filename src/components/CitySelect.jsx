@@ -1,41 +1,63 @@
 import React from 'react';
+import styled from 'styled-components';
 import Autosuggest from 'react-autosuggest';
-// TODO: refactor to styled-components
+import removeAccents from 'remove-accents';
+import Subsubtitle from './Subsubtitle';
+
+import cities from '../data/cities';
 import './autosuggest.css';
 
-// TODO: import options from ../data/cities
-const languages = [
-  {
-    name: 'C',
-    year: 1972
-  },
-  {
-    name: 'Elm',
-    year: 2012
-  },
-];
+const MAX_RESULTS = 10;
 
-// TODO: filter options by city name, state name, etc.
+const prepareString = str => removeAccents(str.toString().toLowerCase().split(' ').join(''));
+
 const getSuggestions = value => {
-  const inputValue = value.trim().toLowerCase();
-  const inputLength = inputValue.length;
+  const inputValue = prepareString(value);
 
-  return inputLength === 0 ? [] : languages.filter(lang =>
-    lang.name.toLowerCase().slice(0, inputLength) === inputValue
-  );
+  return inputValue === '' ? cities.slice(0, MAX_RESULTS) : cities.filter(c => (
+    prepareString(c.name).includes(inputValue) ||
+    prepareString(c.uf).includes(inputValue) ||
+    prepareString(c.ufName).includes(inputValue) ||
+    prepareString(c.ibgeCode).includes(inputValue)
+  )).slice(0, MAX_RESULTS);
 };
 
-// TODO: mount selected city value
-const getSuggestionValue = suggestion => suggestion.name;
+const getSuggestionValue = suggestion => `${suggestion.name} - ${suggestion.uf}`;
 
-// TODO: render option with city name, state name, etc.
+const Suggestion = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const SuggestionTitle = styled.span`
+  font-weight: bold;
+  font-size: 18px;
+`;
+
+const SuggestionSubtitle = styled.span`
+  font-style: italic;
+  font-size: 15px;
+`;
+
 const renderSuggestion = suggestion => (
-  <div>
-    {suggestion.name}
-  </div>
+  <Suggestion>
+    <SuggestionTitle>
+      {suggestion.name}
+    </SuggestionTitle>
+    <SuggestionSubtitle>
+      {suggestion.ufName}
+    </SuggestionSubtitle>
+  </Suggestion>
 );
 
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
 // TODO: refactor to stateless components using hooks
+// TODO: show only if selectedButton === 'municipal'
 class CitySelect extends React.Component {
   constructor() {
     super();
@@ -52,7 +74,6 @@ class CitySelect extends React.Component {
     });
   };
 
-  // TODO: limit to 10 options rendered
   onSuggestionsFetchRequested = ({ value }) => {
     this.setState({
       suggestions: getSuggestions(value)
@@ -61,7 +82,7 @@ class CitySelect extends React.Component {
 
   onSuggestionsClearRequested = () => {
     this.setState({
-      suggestions: []
+      suggestions: cities.slice(0, MAX_RESULTS)
     });
   };
 
@@ -69,21 +90,24 @@ class CitySelect extends React.Component {
     const { value, suggestions } = this.state;
 
     const inputProps = {
-      placeholder: 'Type a programming language',
+      placeholder: 'Pesquise uma cidade pelo seu nome, estado ou código IBGE...',
       value,
       onChange: this.onChange
     };
 
     // TODO: center horizontally, add title, etc.
     return (
-      <Autosuggest
-        suggestions={suggestions}
-        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-        onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-        getSuggestionValue={getSuggestionValue}
-        renderSuggestion={renderSuggestion}
-        inputProps={inputProps}
-      />
+      <Container>
+        <Subsubtitle>Selecione uma cidade</Subsubtitle>
+        <Autosuggest
+          suggestions={suggestions}
+          onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+          onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+          getSuggestionValue={getSuggestionValue}
+          renderSuggestion={renderSuggestion}
+          inputProps={inputProps}
+        />
+      </Container>
     );
   }
 }
