@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Autosuggest from 'react-autosuggest';
 import removeAccents from 'remove-accents';
@@ -9,17 +9,27 @@ import './autosuggest.css';
 
 const MAX_RESULTS = 10;
 
-const prepareString = str => removeAccents(str.toString().toLowerCase().split(' ').join(''));
+const prepareString = (str = '') =>
+  removeAccents(
+    str
+      .toString()
+      .toLowerCase()
+      .split(' ')
+      .join(''),
+  );
 
 const getSuggestions = value => {
   const inputValue = prepareString(value);
 
-  return inputValue === '' ? cities.slice(0, MAX_RESULTS) : cities.filter(c => (
-    prepareString(c.name).includes(inputValue) ||
-    prepareString(c.uf).includes(inputValue) ||
-    prepareString(c.ufName).includes(inputValue) ||
-    prepareString(c.ibgeCode).includes(inputValue)
-  )).slice(0, MAX_RESULTS);
+  return cities
+    .filter(
+      c =>
+        prepareString(c.name).includes(inputValue) ||
+        prepareString(c.uf).includes(inputValue) ||
+        prepareString(c.ufName).includes(inputValue) ||
+        prepareString(c.ibgeCode).includes(inputValue),
+    )
+    .slice(0, MAX_RESULTS);
 };
 
 const getSuggestionValue = suggestion => `${suggestion.name} - ${suggestion.uf}`;
@@ -41,12 +51,8 @@ const SuggestionSubtitle = styled.span`
 
 const renderSuggestion = suggestion => (
   <Suggestion>
-    <SuggestionTitle>
-      {suggestion.name}
-    </SuggestionTitle>
-    <SuggestionSubtitle>
-      {suggestion.ufName}
-    </SuggestionSubtitle>
+    <SuggestionTitle>{suggestion.name}</SuggestionTitle>
+    <SuggestionSubtitle>{suggestion.ufName}</SuggestionSubtitle>
   </Suggestion>
 );
 
@@ -56,60 +62,38 @@ const Container = styled.div`
   align-items: center;
 `;
 
-// TODO: refactor to stateless components using hooks
 // TODO: show only if selectedButton === 'municipal'
-class CitySelect extends React.Component {
-  constructor() {
-    super();
+const CitySelect = ({ callback = () => {} }) => {
+  const initialSuggestions = cities.slice(0, MAX_RESULTS);
+  const [value, setValue] = useState('');
+  const [suggestions, setSuggestions] = useState(initialSuggestions);
 
-    this.state = {
-      value: '',
-      suggestions: []
-    };
-  }
-
-  onChange = (event, { newValue }) => {
-    this.setState({
-      value: newValue
-    });
+  const onSuggestionsFetchRequested = ({ value: v }) => {
+    setSuggestions(getSuggestions(v));
+  };
+  const onSuggestionsClearRequested = () => setSuggestions(initialSuggestions);
+  const onChange = (e, { newValue: v }) => {
+    setValue(v);
+    callback(v);
   };
 
-  onSuggestionsFetchRequested = ({ value }) => {
-    this.setState({
-      suggestions: getSuggestions(value)
-    });
-  };
-
-  onSuggestionsClearRequested = () => {
-    this.setState({
-      suggestions: cities.slice(0, MAX_RESULTS)
-    });
-  };
-
-  render() {
-    const { value, suggestions } = this.state;
-
-    const inputProps = {
-      placeholder: 'Pesquise uma cidade pelo seu nome, estado ou código IBGE...',
-      value,
-      onChange: this.onChange
-    };
-
-    // TODO: center horizontally, add title, etc.
-    return (
-      <Container>
-        <Subsubtitle>Selecione uma cidade</Subsubtitle>
-        <Autosuggest
-          suggestions={suggestions}
-          onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-          onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-          getSuggestionValue={getSuggestionValue}
-          renderSuggestion={renderSuggestion}
-          inputProps={inputProps}
-        />
-      </Container>
-    );
-  }
-}
+  return (
+    <Container>
+      <Subsubtitle>Selecione uma cidade</Subsubtitle>
+      <Autosuggest
+        suggestions={suggestions}
+        onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+        onSuggestionsClearRequested={onSuggestionsClearRequested}
+        getSuggestionValue={getSuggestionValue}
+        renderSuggestion={renderSuggestion}
+        inputProps={{
+          placeholder: 'Pesquise uma cidade pelo seu nome, estado ou código IBGE...',
+          value,
+          onChange,
+        }}
+      />
+    </Container>
+  );
+};
 
 export default CitySelect;
