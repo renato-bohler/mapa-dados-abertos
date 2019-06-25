@@ -6,20 +6,27 @@ import { Body, Content, Title, Subtitle, TextHighlight, Paragraph, Link, Button,
 const App = () => {
   const [selectedScope, setSelectedScope] = useState('');
   const [selectedState, setSelectedState] = useState(0);
+  const [selectedCity, setSelectedCity] = useState(0);
 
   const scrollToList = () => window.scrollTo(0, document.getElementById('list').offsetTop);
 
   const handleClickScope = selected => {
     setSelectedScope(selected);
-    setSelectedState('');
+    setSelectedState(0);
+    setSelectedCity(0);
   };
-
   const handleClickState = region => {
     setSelectedState(region);
     if (region) {
       scrollToList();
     }
   };
+  const handleSelectCity = city => {
+    setSelectedCity(city);
+    if (city) {
+      scrollToList();
+    }
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -52,8 +59,8 @@ const App = () => {
             </Button>
           </ButtonContainer>
           <StateSelect selectedScope={selectedScope} selectedState={selectedState} callback={handleClickState} />
-          <CitySelect selectedScope={selectedScope} />
-          <DataList selectedScope={selectedScope} selectedState={selectedState} />
+          <CitySelect selectedScope={selectedScope} callback={handleSelectCity} />
+          <DataList selectedScope={selectedScope} selectedState={selectedState} selectedCity={selectedCity} />
         </Content>
       </Body>
     </ThemeProvider>

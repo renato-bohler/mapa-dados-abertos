@@ -1,6 +1,6 @@
 .react-autosuggest__container {
   position: relative;
-  margin: 25px 0;
+  margin: 25px 0 75px 0;
 }
 
 .react-autosuggest__input {
@@ -15,7 +15,7 @@
   border-radius: 4px;
   -webkit-appearance: none;
   text-overflow: ellipsis;
-  box-shadow: 5px 5px 20px 0px rgba(0, 0, 0, 0.16862745098039217)
+  box-shadow: 5px 5px 20px 0px rgba(0, 0, 0, 0.15);
 }
 
 .react-autosuggest__input--focused {

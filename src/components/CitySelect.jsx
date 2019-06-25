@@ -86,20 +86,23 @@ const getSuggestions = value => {
     .slice(0, MAX_RESULTS);
 };
 
-const getSuggestionValue = suggestion => `${suggestion.name} - ${suggestion.uf}`;
+const getSuggestionValue = suggestion => suggestion;
 
 const CitySelect = ({ selectedScope, callback = () => {} }) => {
   const initialSuggestions = cities.slice(0, MAX_RESULTS);
   const [value, setValue] = useState('');
   const [suggestions, setSuggestions] = useState(initialSuggestions);
+  const [search, setSearch] = useState('');
 
   const onSuggestionsFetchRequested = ({ value: v }) => {
+    setSearch(v);
     setSuggestions(getSuggestions(v));
   };
   const onSuggestionsClearRequested = () => setSuggestions(initialSuggestions);
   const onChange = (e, { newValue: v }) => {
     setValue(v);
-    callback(v);
+    setSearch('');
+    callback(v.ibgeCode);
   };
 
   return (
@@ -113,7 +116,7 @@ const CitySelect = ({ selectedScope, callback = () => {} }) => {
         renderSuggestion={renderSuggestion}
         inputProps={{
           placeholder: 'Pesquise uma cidade pelo seu nome, estado ou código IBGE...',
-          value,
+          value: search ? search : value ? `${value.name} - ${value.uf}` : '',
           onChange,
         }}
       />

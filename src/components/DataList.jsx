@@ -109,17 +109,18 @@ const List = ({ title, id, visible, data = [] }) => (
   </ListContainer>
 );
 
-const DataList = ({ selectedScope, selectedState = 0 }) => {
-  const isVisible = (scope, state) => {
+const DataList = ({ selectedScope, selectedState, selectedCity }) => {
+  const isVisible = (scope, state, city) => {
     if (scope === 'federal') return true;
     if (scope === 'estadual' && state) return true;
+    if (scope === 'municipal' && city) return true;
     return false;
   };
 
   return (
     <List
       id="list"
-      visible={isVisible(selectedScope, selectedState)}
+      visible={isVisible(selectedScope, selectedState, selectedCity)}
       title={getTitle(selectedScope, selectedState)}
       data={getData(selectedScope, selectedState)}
     />
