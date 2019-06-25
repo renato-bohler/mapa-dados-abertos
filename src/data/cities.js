@@ -16596,7 +16596,13 @@ export default [
     ufCode: 41,
     uf: 'PR',
     ufName: 'Paraná',
-    list: [],
+    list: [
+			{
+				title: 'Dados Abertos Curitiba',
+				subtitle: 'Prefeitura Municipal de Curitiba',
+				url: 'https://www.curitiba.pr.gov.br/dadosabertos/busca',
+			}
+		],
 	},
 	{
 		ibgeCode: 4204806,

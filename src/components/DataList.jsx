@@ -4,26 +4,22 @@ import Subsubtitle from './Subsubtitle';
 
 import federal from '../data/federal';
 import states from '../data/states';
+import cities from '../data/cities';
 
 const getState = ufCode => states.find(s => s.ufCode === ufCode) || { name: '', list: [] };
+const getCity = ibgeCode => cities.find(c => c.ibgeCode === ibgeCode) || { name: '', list: [] };
 
-const getTitle = (selectedButton, selectedRegion = 0) => {
-  if (selectedButton === 'federal') {
-    return 'Dados abertos federais';
-  }
-
-  return `Dados abertos ${getState(selectedRegion).name}`;
+const getTitle = (selectedScope, selectedState, selectedCity) => {
+  if (selectedScope === 'federal') return 'Dados abertos federais';
+  if (selectedScope === 'estadual') return `Dados abertos ${getState(selectedState).name}`;
+  if (selectedScope === 'municipal') return `Dados abertos ${getCity(selectedCity).name}`;
+  return '';
 };
 
-const getData = (selectedButton, selectedRegion = 0) => {
-  if (selectedButton === 'federal') {
-    return federal;
-  }
-
-  if (selectedButton === 'estadual' && selectedRegion) {
-    return getState(selectedRegion).list;
-  }
-
+const getData = (selectedScope, selectedState, selectedCity) => {
+  if (selectedScope === 'federal') return federal;
+  if (selectedScope === 'estadual' && selectedState) return getState(selectedState).list;
+  if (selectedScope === 'municipal' && selectedCity) return getCity(selectedCity).list;
   return [];
 };
 
@@ -109,19 +105,20 @@ const List = ({ title, id, visible, data = [] }) => (
   </ListContainer>
 );
 
-const DataList = ({ selectedButton, selectedRegion = 0 }) => {
-  const isVisible = (button, region) => {
-    if (button === 'federal') return true;
-    if (button === 'estadual' && region) return true;
+const DataList = ({ selectedScope, selectedState, selectedCity }) => {
+  const isVisible = (scope, state, city) => {
+    if (scope === 'federal') return true;
+    if (scope === 'estadual' && state) return true;
+    if (scope === 'municipal' && city) return true;
     return false;
   };
 
   return (
     <List
       id="list"
-      visible={isVisible(selectedButton, selectedRegion)}
-      title={getTitle(selectedButton, selectedRegion)}
-      data={getData(selectedButton, selectedRegion)}
+      visible={isVisible(selectedScope, selectedState, selectedCity)}
+      title={getTitle(selectedScope, selectedState, selectedCity)}
+      data={getData(selectedScope, selectedState, selectedCity)}
     />
   );
 };

@@ -42,12 +42,12 @@ const Container = styled.div`
 
 const mapCenter = [-54.77989334751745, -13.603361893828286];
 
-const StateSelect = ({ callback, selectedButton, selectedRegion }) => {
-  if (selectedButton !== 'estadual') {
+const StateSelect = ({ callback, selectedScope, selectedState }) => {
+  if (selectedScope !== 'estadual') {
     return null;
   }
 
-  const isSelected = geography => geography.id === selectedRegion;
+  const isSelected = geography => geography.id === selectedState;
   const getStateName = ufCode => (states.find(s => s.ufCode === ufCode) || { name: 'a' }).name;
   const countData = geography => (states.find(s => s.ufCode === geography.id) || { list: [] }).list.length;
 

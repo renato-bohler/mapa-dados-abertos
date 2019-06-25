@@ -1,6 +1,7 @@
 export { default as Body } from './Body';
 export { default as Button } from './Button';
 export { default as ButtonContainer } from './ButtonContainer';
+export { default as CitySelect } from './CitySelect';
 export { default as Content } from './Content';
 export { default as DataList } from './DataList';
 export { default as Link } from './Link';
