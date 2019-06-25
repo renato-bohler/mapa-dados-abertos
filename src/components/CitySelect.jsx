@@ -5,6 +5,7 @@ import removeAccents from 'remove-accents';
 import Subsubtitle from './Subsubtitle';
 
 import cities from '../data/cities';
+
 import './autosuggest.css';
 
 const MAX_RESULTS = 10;
@@ -36,6 +37,11 @@ const getSuggestionValue = suggestion => `${suggestion.name} - ${suggestion.uf}`
 
 const Suggestion = styled.div`
   display: flex;
+  justify-content: space-between;
+`;
+
+const SuggestionTitleContainer = styled.div`
+  display: flex;
   flex-direction: column;
 `;
 
@@ -49,10 +55,30 @@ const SuggestionSubtitle = styled.span`
   font-size: 15px;
 `;
 
+const SuggestionDetail = styled.div`
+  display: flex;
+
+  font-size: 12px;
+  font-style: italic;
+
+  justify-content: center;
+  align-items: center;
+
+  background: ${props => (props.count ? props.theme.colors.lightGreen : props.theme.colors.lightRed)};
+  border-radius: 8px;
+
+  padding: 0 5px;
+`;
+
 const renderSuggestion = suggestion => (
   <Suggestion>
-    <SuggestionTitle>{suggestion.name}</SuggestionTitle>
-    <SuggestionSubtitle>{suggestion.ufName}</SuggestionSubtitle>
+    <SuggestionTitleContainer>
+      <SuggestionTitle>{suggestion.name}</SuggestionTitle>
+      <SuggestionSubtitle>{suggestion.ufName}</SuggestionSubtitle>
+    </SuggestionTitleContainer>
+    <SuggestionDetail count={suggestion.list.length}>
+      {suggestion.list.length || 'Nenhuma'} fonte{suggestion.list.length > 1 ? 's' : ''}
+    </SuggestionDetail>
   </Suggestion>
 );
 
