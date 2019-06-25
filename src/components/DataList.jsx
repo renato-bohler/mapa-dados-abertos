@@ -4,26 +4,22 @@ import Subsubtitle from './Subsubtitle';
 
 import federal from '../data/federal';
 import states from '../data/states';
+import cities from '../data/cities';
 
 const getState = ufCode => states.find(s => s.ufCode === ufCode) || { name: '', list: [] };
+const getCity = ibgeCode => cities.find(c => c.ibgeCode === ibgeCode) || { name: '', list: [] };
 
-const getTitle = (selectedScope, selectedState = 0) => {
-  if (selectedScope === 'federal') {
-    return 'Dados abertos federais';
-  }
-
-  return `Dados abertos ${getState(selectedState).name}`;
+const getTitle = (selectedScope, selectedState, selectedCity) => {
+  if (selectedScope === 'federal') return 'Dados abertos federais';
+  if (selectedScope === 'estadual') return `Dados abertos ${getState(selectedState).name}`;
+  if (selectedScope === 'municipal') return `Dados abertos ${getCity(selectedCity).name}`;
+  return '';
 };
 
-const getData = (selectedScope, selectedState = 0) => {
-  if (selectedScope === 'federal') {
-    return federal;
-  }
-
-  if (selectedScope === 'estadual' && selectedState) {
-    return getState(selectedState).list;
-  }
-
+const getData = (selectedScope, selectedState, selectedCity) => {
+  if (selectedScope === 'federal') return federal;
+  if (selectedScope === 'estadual' && selectedState) return getState(selectedState).list;
+  if (selectedScope === 'municipal' && selectedCity) return getCity(selectedCity).list;
   return [];
 };
 
@@ -121,8 +117,8 @@ const DataList = ({ selectedScope, selectedState, selectedCity }) => {
     <List
       id="list"
       visible={isVisible(selectedScope, selectedState, selectedCity)}
-      title={getTitle(selectedScope, selectedState)}
-      data={getData(selectedScope, selectedState)}
+      title={getTitle(selectedScope, selectedState, selectedCity)}
+      data={getData(selectedScope, selectedState, selectedCity)}
     />
   );
 };
