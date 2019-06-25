@@ -4,18 +4,18 @@ import theme from './theme';
 import { Body, Content, Title, Subtitle, TextHighlight, Paragraph, Link, Button, ButtonContainer, DataList, StateSelect, CitySelect } from './components';
 
 const App = () => {
-  const [selectedButton, setSelectedButton] = useState('');
-  const [selectedRegion, setSelectedRegion] = useState(0);
+  const [selectedScope, setSelectedScope] = useState('');
+  const [selectedState, setSelectedState] = useState(0);
 
   const scrollToList = () => window.scrollTo(0, document.getElementById('list').offsetTop);
 
-  const handleClickButton = selected => {
-    setSelectedButton(selected);
-    setSelectedRegion('');
+  const handleClickScope = selected => {
+    setSelectedScope(selected);
+    setSelectedState('');
   };
 
-  const handleClickRegion = region => {
-    setSelectedRegion(region);
+  const handleClickState = region => {
+    setSelectedState(region);
     if (region) {
       scrollToList();
     }
@@ -41,19 +41,19 @@ const App = () => {
           </Paragraph>
           <Subtitle>Selecione uma opção</Subtitle>
           <ButtonContainer>
-            <Button onClick={() => handleClickButton('federal')} selected={selectedButton === 'federal'}>
+            <Button onClick={() => handleClickScope('federal')} selected={selectedScope === 'federal'}>
               Federal
             </Button>
-            <Button onClick={() => handleClickButton('estadual')} selected={selectedButton === 'estadual'}>
+            <Button onClick={() => handleClickScope('estadual')} selected={selectedScope === 'estadual'}>
               Estadual
             </Button>
-            <Button onClick={() => handleClickButton('municipal')} selected={selectedButton === 'municipal'}>
+            <Button onClick={() => handleClickScope('municipal')} selected={selectedScope === 'municipal'}>
               Municipal
             </Button>
           </ButtonContainer>
-          <StateSelect selectedButton={selectedButton} selectedRegion={selectedRegion} callback={handleClickRegion} />
-          <CitySelect selectedButton={selectedButton} />
-          <DataList selectedButton={selectedButton} selectedRegion={selectedRegion} />
+          <StateSelect selectedScope={selectedScope} selectedState={selectedState} callback={handleClickState} />
+          <CitySelect selectedScope={selectedScope} />
+          <DataList selectedScope={selectedScope} selectedState={selectedState} />
         </Content>
       </Body>
     </ThemeProvider>

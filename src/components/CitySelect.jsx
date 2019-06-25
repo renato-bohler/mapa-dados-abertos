@@ -88,7 +88,7 @@ const getSuggestions = value => {
 
 const getSuggestionValue = suggestion => `${suggestion.name} - ${suggestion.uf}`;
 
-const CitySelect = ({ selectedButton, callback = () => {} }) => {
+const CitySelect = ({ selectedScope, callback = () => {} }) => {
   const initialSuggestions = cities.slice(0, MAX_RESULTS);
   const [value, setValue] = useState('');
   const [suggestions, setSuggestions] = useState(initialSuggestions);
@@ -103,7 +103,7 @@ const CitySelect = ({ selectedButton, callback = () => {} }) => {
   };
 
   return (
-    <Container visible={selectedButton === 'municipal'}>
+    <Container visible={selectedScope === 'municipal'}>
       <Subsubtitle>Selecione uma cidade</Subsubtitle>
       <Autosuggest
         suggestions={suggestions}

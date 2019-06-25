@@ -7,21 +7,21 @@ import states from '../data/states';
 
 const getState = ufCode => states.find(s => s.ufCode === ufCode) || { name: '', list: [] };
 
-const getTitle = (selectedButton, selectedRegion = 0) => {
-  if (selectedButton === 'federal') {
+const getTitle = (selectedScope, selectedState = 0) => {
+  if (selectedScope === 'federal') {
     return 'Dados abertos federais';
   }
 
-  return `Dados abertos ${getState(selectedRegion).name}`;
+  return `Dados abertos ${getState(selectedState).name}`;
 };
 
-const getData = (selectedButton, selectedRegion = 0) => {
-  if (selectedButton === 'federal') {
+const getData = (selectedScope, selectedState = 0) => {
+  if (selectedScope === 'federal') {
     return federal;
   }
 
-  if (selectedButton === 'estadual' && selectedRegion) {
-    return getState(selectedRegion).list;
+  if (selectedScope === 'estadual' && selectedState) {
+    return getState(selectedState).list;
   }
 
   return [];
@@ -109,19 +109,19 @@ const List = ({ title, id, visible, data = [] }) => (
   </ListContainer>
 );
 
-const DataList = ({ selectedButton, selectedRegion = 0 }) => {
-  const isVisible = (button, region) => {
-    if (button === 'federal') return true;
-    if (button === 'estadual' && region) return true;
+const DataList = ({ selectedScope, selectedState = 0 }) => {
+  const isVisible = (scope, state) => {
+    if (scope === 'federal') return true;
+    if (scope === 'estadual' && state) return true;
     return false;
   };
 
   return (
     <List
       id="list"
-      visible={isVisible(selectedButton, selectedRegion)}
-      title={getTitle(selectedButton, selectedRegion)}
-      data={getData(selectedButton, selectedRegion)}
+      visible={isVisible(selectedScope, selectedState)}
+      title={getTitle(selectedScope, selectedState)}
+      data={getData(selectedScope, selectedState)}
     />
   );
 };
