@@ -52,7 +52,7 @@ const App = () => {
             </Button>
           </ButtonContainer>
           <StateSelect selectedButton={selectedButton} selectedRegion={selectedRegion} callback={handleClickRegion} />
-          <CitySelect />
+          <CitySelect selectedButton={selectedButton} />
           <DataList selectedButton={selectedButton} selectedRegion={selectedRegion} />
         </Content>
       </Body>

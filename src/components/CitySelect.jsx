@@ -10,30 +10,11 @@ import './autosuggest.css';
 
 const MAX_RESULTS = 10;
 
-const prepareString = (str = '') =>
-  removeAccents(
-    str
-      .toString()
-      .toLowerCase()
-      .split(' ')
-      .join(''),
-  );
-
-const getSuggestions = value => {
-  const inputValue = prepareString(value);
-
-  return cities
-    .filter(
-      c =>
-        prepareString(c.name).includes(inputValue) ||
-        prepareString(c.uf).includes(inputValue) ||
-        prepareString(c.ufName).includes(inputValue) ||
-        prepareString(c.ibgeCode).includes(inputValue),
-    )
-    .slice(0, MAX_RESULTS);
-};
-
-const getSuggestionValue = suggestion => `${suggestion.name} - ${suggestion.uf}`;
+const Container = styled.div`
+  display: ${props => props.visible ? 'flex' : 'none'};
+  flex-direction: column;
+  align-items: center;
+`;
 
 const Suggestion = styled.div`
   display: flex;
@@ -82,14 +63,32 @@ const renderSuggestion = suggestion => (
   </Suggestion>
 );
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
+const prepareString = (str = '') =>
+  removeAccents(
+    str
+      .toString()
+      .toLowerCase()
+      .split(' ')
+      .join(''),
+  );
 
-// TODO: show only if selectedButton === 'municipal'
-const CitySelect = ({ callback = () => {} }) => {
+const getSuggestions = value => {
+  const inputValue = prepareString(value);
+
+  return cities
+    .filter(
+      c =>
+        prepareString(c.name).includes(inputValue) ||
+        prepareString(c.uf).includes(inputValue) ||
+        prepareString(c.ufName).includes(inputValue) ||
+        prepareString(c.ibgeCode).includes(inputValue),
+    )
+    .slice(0, MAX_RESULTS);
+};
+
+const getSuggestionValue = suggestion => `${suggestion.name} - ${suggestion.uf}`;
+
+const CitySelect = ({ selectedButton, callback = () => {} }) => {
   const initialSuggestions = cities.slice(0, MAX_RESULTS);
   const [value, setValue] = useState('');
   const [suggestions, setSuggestions] = useState(initialSuggestions);
@@ -104,7 +103,7 @@ const CitySelect = ({ callback = () => {} }) => {
   };
 
   return (
-    <Container>
+    <Container visible={selectedButton === 'municipal'}>
       <Subsubtitle>Selecione uma cidade</Subsubtitle>
       <Autosuggest
         suggestions={suggestions}
