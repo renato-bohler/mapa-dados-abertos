@@ -16598,8 +16598,8 @@ export default [
     ufName: 'Paraná',
     list: [
 			{
-				title: 'Dados Abertos Curitiba',
-				subtitle: 'Prefeitura Municipal de Curitiba',
+				title: 'Prefeitura Municipal de Curitiba',
+				subtitle: 'Dados Abertos Curitiba',
 				url: 'https://www.curitiba.pr.gov.br/dadosabertos/busca',
 			}
 		],
