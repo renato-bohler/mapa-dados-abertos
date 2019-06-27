@@ -40,6 +40,7 @@
   position: absolute;
   top: 51px;
   width: 540px;
+  max-width: calc(80vw + 40px);
   border: 1px solid #aaa;
   background-color: #fff;
   font-family: 'Open Sans', sans-serif;
