@@ -26,7 +26,7 @@ const App = () => {
     if (city) {
       scrollToList();
     }
-  }
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -44,7 +44,11 @@ const App = () => {
             <Link href="https://github.com/renato-bohler/mapa-dados-abertos" target="_blank" rel="noopener noreferrer">
               através deste repositório
             </Link>
-            , hospedado no GitHub.
+            , hospedado no GitHub. A leitura{' '}
+            <Link href="https://github.com/renato-bohler/mapa-dados-abertos/blob/master/.github/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer">
+              desta documentação
+            </Link>{' '}
+            é recomendada antes de iniciar um trabalho de contribuição.
           </Paragraph>
           <Subtitle>Selecione uma opção</Subtitle>
           <ButtonContainer>
