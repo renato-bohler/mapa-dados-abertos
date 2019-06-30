@@ -8,6 +8,7 @@ Este documento contém algumas instruções sobre como colaborar com o projeto.
 - É necessário possuir uma conta no GitHub para efetuar as alterações.
 - As alterações propostas devem ser realizadas num fork deste repositório, e um pull request deve ser aberto a partir do repositório forkado para este repositório.
 - Toda alteração estará sujeita a aprovação pelos administradores do repositório.
+- Após a aceitação de uma alteração proposta, o processo de deploy do projeto será automaticamente ativado, e as alterações estarão disponíveis no site em poucos minutos.
 - Qualquer dúvida em relação ao processo de contribuição, sinta-se à vontade para [abrir uma issue](https://github.com/renato-bohler/mapa-dados-abertos/issues/new) neste repositório.
 
 ## Alterações no conteúdo
@@ -25,9 +26,9 @@ Todos os arquivos possuem uma estrutura de dados idêntica para identificar o t�
 
 ```
 {
-  title: 'Governo Federal',
-  subtitle: 'Portal da Transparência',
-  url: 'http://www.portaltransparencia.gov.br/download-de-dados',
+  title: 'Governo Federal', // Quem?
+  subtitle: 'Portal da Transparência', // O que?
+  url: 'http://www.portaltransparencia.gov.br/download-de-dados', // Onde?
 }
 ```
 
