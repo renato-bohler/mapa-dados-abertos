@@ -4,4 +4,4 @@ Este é o repositório do [mapa brasileiro de dados abertos](https://renato-bohl
 
 ## Quero contribuir
 
-Toda contribuição é bem vinda. Para contribuir, primeiramente é recomendado ler a [documentação de contribuição](https://github.com/renato-bohler/mapa-dados-abertos/blob/documentacao/.github/CONTRIBUTING.md) do projeto.
+Toda contribuição é bem vinda. Para contribuir, primeiramente é recomendado ler a [documentação de contribuição](https://github.com/renato-bohler/mapa-dados-abertos/blob/master/.github/CONTRIBUTING.md) do projeto.
